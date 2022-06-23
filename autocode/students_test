@@ -110,3 +110,43 @@ func TestNewMatrix_ValidMatrix(t *testing.T) {
 		t.Error("Valid matrix, New() return nil matrix")
 	}
 }
+
+func TestMatrixRows(t *testing.T) {
+	matrix, _ := New(`1 2 34
+5 6 78
+9 10 -1`)
+	rows := matrix.Rows()
+	expected := [][]int{
+		{1, 2, 34},
+		{5, 6, 78},
+		{9, 10, -1},
+	}
+
+	for i := 0; i < matrix.rows; i++ {
+		for j := 0; j < matrix.cols; j++ {
+			if rows[i][j] != expected[i][j] {
+				t.Error("Error matrix rows")
+			}
+		}
+	}
+}
+
+func TestMatrixCols(t *testing.T) {
+	matrix, _ := New(`1 2 34
+5 6 78
+9 10 -1`)
+	cols := matrix.Cols()
+	expected := [][]int{
+		{1, 5, 9},
+		{2, 6, 10},
+		{34, 78, -1},
+	}
+
+	for i := 0; i < matrix.rows; i++ {
+		for j := 0; j < matrix.cols; j++ {
+			if cols[i][j] != expected[i][j] {
+				t.Error("Error matrix cols")
+			}
+		}
+	}
+}
