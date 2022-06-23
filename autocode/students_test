@@ -85,8 +85,28 @@ func TestPeopleLess(t *testing.T) {
 }
 
 func TestNewMatrix_NotANumber(t *testing.T) {
-	_, err := New("qwerty");
+	_, err := New("qwerty")
 	if err == nil {
-		t.Error("Wrong matrix not a number, expected error, got nil");
+		t.Error("Wrong matrix not a number, expected error, got nil")
+	}
+}
+
+func TestNewMatrix_RowsDifferentLength(t *testing.T) {
+	_, err := New(`1 2 3
+	4 5`)
+	if err == nil {
+		t.Error("Wrong matrix Rows Different Length, expected error, got nil")
+	}
+}
+
+func TestNewMatrix_ValidMatrix(t *testing.T) {
+	matrix, err := New(`1 2 34
+5 6 78
+9 10 -1`)
+	if err != nil {
+		t.Error("Valid matrix, expected error == nil, got error")
+	}
+	if matrix == nil {
+		t.Error("Valid matrix, New() return nil matrix")
 	}
 }
