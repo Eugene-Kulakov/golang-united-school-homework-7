@@ -81,6 +81,12 @@ func TestPeopleLess(t *testing.T) {
 		if result != testCase.expected {
 			t.Error("Error TestPeopleLess")
 		}
+	}
+}
 
+func TestNewMatrix_NotANumber(t *testing.T) {
+	_, err := New("qwerty");
+	if err == nil {
+		t.Error("Wrong matrix not a number, expected error, got nil");
 	}
 }
