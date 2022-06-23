@@ -150,3 +150,31 @@ func TestMatrixCols(t *testing.T) {
 		}
 	}
 }
+
+func TestMatrixSet_WrongCol(t *testing.T) {
+	matrix, _ := New(`1 2 34
+5 6 78
+9 10 -1`)
+
+	success := matrix.Set(5, 2, -100)
+	if success {
+		t.Error("Matrix Set() wrong col, expexted false, got true")
+	}
+
+}
+
+func TestMatrixSet(t *testing.T) {
+	matrix, _ := New(`1 2 34
+5 6 78
+9 10 -1`)
+
+	matrix.Set(1, 2, -100)
+
+	expected := []int{1, 2, 34, 5, -100, 78, 9, 10, -1}
+
+	for i := 0; i < matrix.rows*matrix.cols; i++ {
+		if matrix.data[i] != expected[i] {
+			t.Error("Error matrix set")
+		}
+	}
+}
