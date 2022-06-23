@@ -20,7 +20,7 @@ func init() {
 
 // WRITE YOUR CODE BELOW
 
-func TestLenPeople(t *testing.T) {
+func TestPeopleLen(t *testing.T) {
 	p := People{
 		{"Eugene", "Kulakov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)},
 		{"Pavel", "Ivanov", time.Date(2001, 11, 17, 0, 0, 0, 0, time.UTC)},
@@ -29,5 +29,58 @@ func TestLenPeople(t *testing.T) {
 	expected := 2
 	if ans != expected {
 		t.Errorf("Error People Len() expected: %d, got: %d", expected, ans)
+	}
+}
+
+func TestPeopleSwap(t *testing.T) {
+	person0 := Person{"Eugene", "Kulakov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)}
+	person1 := Person{"Pavel", "Ivanov", time.Date(2001, 11, 17, 0, 0, 0, 0, time.UTC)}
+	person2 := Person{"Aleksey", "Navalny", time.Date(1976, 06, 04, 0, 0, 0, 0, time.UTC)}
+	person3 := Person{"Vladimir", "Putin", time.Date(1952, 10, 07, 0, 0, 0, 0, time.UTC)}
+
+	p := People{
+		person0,
+		person1,
+		person2,
+		person3,
+	}
+	p.Swap(2, 3)
+
+	if p[2] != person3 || p[3] != person2 {
+		t.Error("Error People Swap")
+	}
+}
+
+func TestPeopleLess(t *testing.T) {
+	person0 := Person{"Eugene", "Kulakov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)}
+	person1 := Person{"Eugene", "Petrov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)}
+	person2 := Person{"Pavel", "Ivanov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)}
+	person3 := Person{"Aleksey", "Navalny", time.Date(1976, 06, 04, 0, 0, 0, 0, time.UTC)}
+
+	p := People{
+		person0,
+		person1,
+		person2,
+		person3,
+	}
+
+	testTable := []struct {
+		i, j     int
+		expected bool
+	}{
+		{0, 1, true},
+		{1, 0, false},
+		{0, 2, true},
+		{2, 0, false},
+		{0, 3, true},
+		{3, 0, false},
+	}
+
+	for _, testCase := range testTable {
+		result := p.Less(testCase.i, testCase.j)
+		if result != testCase.expected {
+			t.Error("Error TestPeopleLess")
+		}
+
 	}
 }
