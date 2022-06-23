@@ -2,6 +2,8 @@ package coverage
 
 import (
 	"os"
+	"testing"
+	"time"
 )
 
 // DO NOT EDIT THIS FUNCTION
@@ -18,3 +20,14 @@ func init() {
 
 // WRITE YOUR CODE BELOW
 
+func TestLenPeople(t *testing.T) {
+	p := People{
+		{"Eugene", "Kulakov", time.Date(1983, 03, 20, 0, 0, 0, 0, time.UTC)},
+		{"Pavel", "Ivanov", time.Date(2001, 11, 17, 0, 0, 0, 0, time.UTC)},
+	}
+	ans := p.Len()
+	expected := 2
+	if ans != expected {
+		t.Errorf("Error People Len() expected: %d, got: %d", expected, ans)
+	}
+}
